@@ -1,26 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import HomeView from '../views/HomeView'
+import ReportView from '../views/ReportView'
 
 Vue.use(Router)
 
-// route-level code splitting
-const createListView = id => () => import('../views/CreateListView').then(m => m.default(id))
-const ItemView = () => import('../views/ItemView.vue')
-const UserView = () => import('../views/UserView.vue')
-
-export function createRouter () {
-  return new Router({
-    mode: 'history',
-    scrollBehavior: () => ({ y: 0 }),
-    routes: [
-      { path: '/top/:page(\\d+)?', component: createListView('top') },
-      { path: '/new/:page(\\d+)?', component: createListView('new') },
-      { path: '/show/:page(\\d+)?', component: createListView('show') },
-      { path: '/ask/:page(\\d+)?', component: createListView('ask') },
-      { path: '/job/:page(\\d+)?', component: createListView('job') },
-      { path: '/item/:id(\\d+)', component: ItemView },
-      { path: '/user/:id', component: UserView },
-      { path: '/', redirect: '/top' }
-    ]
-  })
-}
+export default new Router({
+  mode: 'hash',
+  routes: [
+    {
+      path: '/Home',
+      component: HomeView,
+      name: 'Home'
+    },
+    {
+      path: '/Reports',
+      component: ReportView,
+      name: 'Reports'
+    },
+    {
+      path: '/RTNET',
+      component: ReportView,
+      name: 'RTNET'
+    },
+    {
+      path: '/RTCA',
+      component: ReportView,
+      name: 'RTCA'
+    },
+    {
+      path: '/DSA',
+      component: ReportView,
+      name: 'DSA'
+    },
+    {
+      path: '/SCED',
+      component: ReportView,
+      name: 'SCED'
+    },
+    {
+      path: '/RUC',
+      component: ReportView,
+      name: 'RUC'
+    },
+    {
+      path: '/Wiki',
+      component: ReportView,
+      name: 'Wiki'
+    },
+    {
+      path: '/',
+      redirect: '/Home'
+    }
+  ]
+})
+// They are essentially higher order components wrapping ItemList.vue.
